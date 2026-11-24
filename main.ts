@@ -11,6 +11,15 @@ import { join } from "node:path";
 const ENTRY =
   "My map says that corner is a wall. I drew the map. I am not arguing with myself about it.";
 
+const MAX_CHARS = 140;
+
+if ([...ENTRY].length > MAX_CHARS) {
+  console.error(
+    `entry is ${[...ENTRY].length} characters, over the ${MAX_CHARS}-character gate`,
+  );
+  process.exit(1);
+}
+
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outputDir, { recursive: true });
 writeFileSync(join(outputDir, "entry.txt"), ENTRY, "utf8");
